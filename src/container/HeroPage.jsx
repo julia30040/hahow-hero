@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import Loader from '../component/Loader';
 import HeroList from '../component/HeroList';
 
 const Wrapper = styled.div`
@@ -38,8 +39,11 @@ class HeroPage extends Component {
 
   render() {
     const {
+      isLoaded,
       heroes,
     } = this.state;
+
+    if(!isLoaded) return <Loader/>;
 
     return (
       <Wrapper>
