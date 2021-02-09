@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import HeroCard from '../component/HeroCard';
+import HeroList from '../component/HeroList';
 
 const Wrapper = styled.div`
-`;
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const ListWrapper = styled.div`
-  margin: 0 auto;
-  display: flex;
 `;
 
 class HeroPage extends Component {
@@ -22,7 +12,6 @@ class HeroPage extends Component {
 
     this.state = {
       heroes: [],
-      activeHeroId: null,
       isLoaded: false,
       error: null,
     }
@@ -54,13 +43,9 @@ class HeroPage extends Component {
 
     return (
       <Wrapper>
-        <Container className="container">
-          <ListWrapper>
-            {heroes.map(hero => (
-              <HeroCard key={`hero-${hero.id}`} hero={hero} />
-            ))}
-          </ListWrapper>
-        </Container>
+        <div className="container">
+          <HeroList heroes={heroes}/>
+        </div>
       </Wrapper>
     );
   }
