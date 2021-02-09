@@ -1,31 +1,44 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  background-color: ${({ isActive }) => isActive ? 'white' : 'lightgrey'};
-  padding: 20px;
+const StyledNavLink = styled(NavLink)`
+  background-color: lightgrey;
+  padding: 16px;
+  transition: all .24s ease;
+
+  &.-active {
+    background-color: white;
+  }
+
+  &:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
 `;
+
 const Avatar = styled.img`
   width: 200px;
-  height: 200px;
   background: #f9f9f9;
 `;
-const Name = styled.h3`
-  font-size: 20px;
+
+const Name = styled.div`
+  font-size: 28px;
   color: grey;
+  margin-top: 10px;
 `;
 
 function HeroCard({
   hero,
-  isActive,
 }) {
   return (
-    <Wrapper isActive={isActive}>
-      <Avatar src={`https://placem.at/people?w=200&h=200&random=${hero.id}&txt=0&overlay_color=ffffff`}>
-      </Avatar>
-      <Name>{hero.name}</Name>
-    </Wrapper>
-  )
+    <StyledNavLink
+      to={`/heroes/${hero.id}`}
+      activeClassName="-active">
+        <Avatar src={hero.image} />
+        <Name>{hero.name}</Name>
+    </StyledNavLink>
+  );
 }
 
-export default HeroCard
+export default HeroCard;
