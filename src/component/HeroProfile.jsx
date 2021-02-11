@@ -22,12 +22,16 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   @media screen and (max-width: 767px) {
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 320px;
   }
 `;
 
 const ListItem = styled.div`
   display: flex;
   align-items: center;
+
   &:not(:last-child) {
     margin-bottom: 10px; 
   }

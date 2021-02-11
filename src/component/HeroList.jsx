@@ -11,6 +11,12 @@ const Wrapper = styled.div`
   justify-content: center;
   > * {
     margin: 0 10px 10px;
+    @media screen and (max-width: 767px) {
+      margin: 0 10px 10px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 `;
 
