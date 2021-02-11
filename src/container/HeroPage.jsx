@@ -1,10 +1,18 @@
-import React, { Component } from 'react';
+import React, {
+  useState,
+  useEffect,
+} from 'react';
 import styled from 'styled-components';
-import { Route } from 'react-router-dom';
+import {
+  Route,
+  useParams,
+} from 'react-router-dom';
 
 import Loader from '../component/Loader';
 import HeroList from '../component/HeroList';
 import HeroProfile from '../component/HeroProfile';
+
+import { COLOR_RED } from '../share/color'
 
 const Wrapper = styled.div`
   position: relative;
@@ -24,58 +32,62 @@ const Wrapper = styled.div`
   }
 `;
 
-class HeroPage extends Component {
-  constructor(props) {
-    super(props);
+const Error = styled.div`
+  font-size: 15px;
+  color: ${COLOR_RED};
+  width: 100%;
+  text-align: center;
+  margin-top: 32px;
+  animation: fade-in .3s linear forwards;
+`;
 
-    this.state = {
-      heroes: [],
-      isLoaded: false,
-      error: null,
-    }
-    // TODO: add document.title
-  }
+function HeroPage() {
+  const { heroId } = useParams();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [heroes, setHeroes] = useState([]);
+  const [error, setError] = useState(null);
 
-  componentDidMount() {
+  const isHeroListPage = !heroId;
+
+  useEffect(() => {
     fetch("https://hahow-recruit.herokuapp.com/heroes")
       .then(res => res.json())
       .then(
         (heroes) => {
-          this.setState({
-            isLoaded: true,
-            heroes
-          })
+          setIsLoaded(true);
+          setHeroes(heroes);
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          })
+          setIsLoaded(true);
+          setError(error);
         }
-      )
-  }
+      );
 
-  render() {
-    const {
-      isLoaded,
-      heroes,
-    } = this.state;
+      return () => {
+        setIsLoaded(true);
+        setHeroes([]);
+        setError(null);
+      }
+  }, []);
 
-    return (
-      <Wrapper>
-        {isLoaded ? (
-          <div className="container">
-            <HeroList heroes={heroes}/>
-            <Route path="/heroes/:heroId">
-              <HeroProfile />
-            </Route>
-          </div>
-        ) : (
-          <Loader className={'list-loader'} />
-        )}
-      </Wrapper>
-    );
-  }
+
+  return (
+    <Wrapper>
+      {isLoaded ? (
+        <div className="container">
+          <HeroList heroes={heroes}/>
+          <Route path="/heroes/:heroId">
+            <HeroProfile />
+          </Route>
+        </div>
+      ) : (
+        <Loader className={'list-loader'} />
+      )}
+      {error ? (
+        <Error>{error}</Error>
+      ) : null}
+    </Wrapper>
+  );
 }
 
 export default HeroPage;
