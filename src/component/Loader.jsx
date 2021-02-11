@@ -18,10 +18,6 @@ const jump = keyframes`
 const Wrapper = styled.div`
   font-size: 32px;
   color: grey;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 `;
 
 const Text = styled.span`
@@ -29,16 +25,18 @@ const Text = styled.span`
     animation: ${jump} .6s ${({index}) => parseInt(index, 10) * 0.1}s linear alternate infinite;
 `;
 
-function Loader() {
+function Loader({
+  className,
+}) {
   const loadTexts = 'Loading...'.split('');
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       {loadTexts.map((loadText, index) => (
         <Text index={index} key={`loadText-${index}`}>{loadText}</Text>
       ))}
     </Wrapper>
-  )
+  );
 }
 
 export default Loader;
