@@ -2,13 +2,19 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+import {
+  COLOR_BLUE,
+  COLOR_YELLOW,
+} from '../share/color'
+
 const StyledNavLink = styled(NavLink)`
-  background-color: lightgrey;
+  background-color: ${COLOR_BLUE};
   padding: 16px;
   transition: all .24s ease;
+  border-radius: 10px;
 
   &.-active {
-    background-color: white;
+    background-color: ${COLOR_YELLOW};
   }
 
   &:hover {
@@ -24,8 +30,13 @@ const Avatar = styled.img`
 
 const Name = styled.div`
   font-size: 28px;
-  color: grey;
+  color: #d3d3d3;
   margin-top: 10px;
+  text-align: center;
+  
+  .-active & {
+    color: #000;
+  }
 `;
 
 function HeroCard({
