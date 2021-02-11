@@ -33,6 +33,7 @@ class HeroPage extends Component {
       isLoaded: false,
       error: null,
     }
+    // TODO: add document.title
   }
 
   componentDidMount() {
