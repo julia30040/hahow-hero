@@ -26,6 +26,12 @@ const Wrapper = styled.div`
     align-items: center;
     min-height: 320px;
   }
+  .profile-loader {
+    margin-top: 60px;
+    @media screen and (max-width: 767px) {
+      margin-top: 0px;
+    }
+  }
 `;
 
 const ListItem = styled.div`
@@ -255,7 +261,7 @@ function HeroProfile() {
               </SubmitButton>
           </StatusBlock>
         </Fragment>
-      ) : <Loader />}
+      ) : <Loader className="profile-loader" />}
       {message && message.text ? (
         <Message className={`-${message.type}`}>{message.text}</Message>
       ) : null}

@@ -25,6 +25,7 @@ const StyledNavLink = styled(NavLink)`
 
 const Avatar = styled.img`
   width: 200px;
+  height: 200px;
   background: #f9f9f9;
 `;
 
