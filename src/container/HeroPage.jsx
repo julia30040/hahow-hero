@@ -70,6 +70,9 @@ function HeroPage() {
       }
   }, []);
 
+  useEffect(() => {
+    document.title = isHeroListPage ? 'Hero List Page' : 'Hero Profile Page';
+  }, [isHeroListPage])
 
   return (
     <Wrapper>
